@@ -6,44 +6,55 @@ rep = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "
 family = [1, 18, 1, 2, 13, 14, 15, 16, 17, 18, 1, 2, 13, 14, 15, 16, 17, 18,
 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 while true
-puts ""
-elecs =[]
-elecsToGo = 999
-while elecsToGo > 118
-print "Electrons: "
-elecsToGo = gets.chomp.to_i
-if elecsToGo > 118
-puts "Electron limit is 118"
-end
-end
-elementNum = elecsToGo
-puts "Detected element: " + elements[elecsToGo-1]
-puts "Representation: " + rep[elecsToGo-1]
-i=0
-while elecsToGo > 0
-if elecsToGo > pauling[i]
-elecsToGo = elecsToGo - pauling[i]
-elecs[i] = pauling[i].to_i
-i=i+1
-else
-elecs[i] = elecsToGo
-elecsToGo = 0
-end
-end
-puts "Distribution:"
-n=0
-while n<elecs.length
-if elecs[n]!=0
-print bigNums[n].to_s
-print letters[n].to_s
-print elecs[n].to_s
-if n+1 != elecs.length
-print ", "
-end
-end
-n = n+1
-end
-puts ""
-print "Family: "+family[elementNum-1].to_s
-#puts "--/--"
+	puts ""
+	elecs =[]
+	elecsToGo = 999
+	while elecsToGo > 118
+		print "Electrons: "
+		elecsToGo = gets.chomp.to_i
+		if elecsToGo > 118
+			puts "Electron limit is 118"
+		end
+	end
+	elementNum = elecsToGo
+	puts "Detected element: " + elements[elecsToGo-1]
+	puts "Representation: " + rep[elecsToGo-1]
+	i=0
+	while elecsToGo > 0
+		if elecsToGo > pauling[i]
+			elecsToGo = elecsToGo - pauling[i]
+			elecs[i] = pauling[i].to_i
+			i=i+1
+		else
+			elecs[i] = elecsToGo
+			elecsToGo = 0
+		end
+	end
+	puts "Distribution:"
+	n=0
+	while n<elecs.length
+		if elecs[n]!=0
+			print bigNums[n].to_s
+			print letters[n].to_s
+			print elecs[n].to_s
+			if n+1 != elecs.length
+				print ", "
+			end
+		end
+		n = n+1
+	end
+	n = n-1
+	puts ""
+	print "Family: "+family[elementNum-1].to_s
+	puts ""
+	print "Type: "
+	if letters[n] == "s"
+		puts "representative"
+	elsif letters[n] == "p"
+		puts "representative"
+	elsif letters[n] == "d"
+		puts "transition"
+	elsif letters[n] == "f"
+		puts "transition"
+	end
 end
