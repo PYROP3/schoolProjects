@@ -1,0 +1,4 @@
+I have a few ideas for the code on the electrons
+Maybe add some way of telling whether the element will receive or donate electrons
+Or maybe even showing how many electrons on the outer shell
+I’ll try to do it as soon as I get time
