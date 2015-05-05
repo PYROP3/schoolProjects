@@ -48,6 +48,7 @@ end
 
 for k in 0..(columns2-1)
 print matrixR[k]
+puts
 end
 
 puts "--//--"
