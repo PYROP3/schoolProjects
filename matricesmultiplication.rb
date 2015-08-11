@@ -3,7 +3,7 @@ def receiveNumber min, max, message
     isOK = false
     while !isOK
         print message
-        rcv = gets.chomp.to_r
+        rcv = gets.chomp.to_f
         if ((rcv >= min) and (rcv <= max))
             return rcv
             isOK = true
@@ -22,7 +22,7 @@ def outputM cols, line
             if rcv == nil
                 puts "Empty line"
             else
-                testing = rcv.chomp.split(",").map(&:to_r)
+                testing = rcv.chomp.split(",").map(&:to_f)
                 if testing.length == cols
                     return testing
                     accept = true
