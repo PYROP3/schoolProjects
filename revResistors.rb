@@ -78,10 +78,11 @@ while true
 	approx = false
 	mathsIsOk = false
 	firstTry = true
+	oldRes = res
 	while !mathsIsOk
 		if !firstTry
-			oldRes = res
-			res = ((res/10).floor)*10
+			#res = ((res/10).floor)*10
+			res = ((res/10).floor)
 			bands = []
 		end
 		case bNum
@@ -136,6 +137,7 @@ while true
 				end
 		end
 		firstTry = false
+		
 	end
 	puts "\nBand colors: " + bands.join(" ") 
 	puts "\nMaths didn't work out, try a bigger band number (test with " + (bNum + 1).to_s + " bands)" if !mathsIsOk
