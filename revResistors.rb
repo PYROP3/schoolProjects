@@ -32,23 +32,40 @@ while true
 	print "Resistance: "
 	res = gets.chomp.to_f
 	#puts "Received resistance: " + res.to_s
-	print "Tolerance (0 = no tolerance): "
-	tol = gets.chomp.to_f
-	break unless tolerance.has_key?(tol)
+	tol = 0
+	while !tolerance.has_key?(tol) do
+		print "Tolerance (0 = no tolerance): "
+		tol = gets.chomp.to_f
+		if !tolerance.has_key?(tol)
+			puts "Invalid value"
+		end
+	end
+	#break unless tolerance.has_key?(tol)
 	if tol != 0
-		print "4, 5 or 6 bands? "
-		bNum = gets.chomp.to_i
+		while (bNum != 4 && bNum != 5 && bNum != 6)
+			print "4, 5 or 6 bands? "
+			bNum = gets.chomp.to_i
+			if (bNum != 4 && bNum != 5 && bNum != 6)
+				puts "Invalid number"
+			end
+		end
 		addTol = true
 		if bNum != 4
-			print "Temperature coefficient (0 = no temp. coeff): "
-			temp = gets.chomp.to_i
-			break unless tempCoef.has_key?(temp)
+			temp = 0
+			while !tempCoef.has_key?(temp) do
+				print "Temperature coefficient (0 = no temp. coeff): "
+				temp = gets.chomp.to_i
+				if !tempCoef.has_key?(temp) 
+					puts "invalid value"
+				end
+			end
+			#break unless tempCoef.has_key?(temp)
 			if temp != 0
 				bNum = 6
 				addTCo = true
 			end
 		end
-	end
+	end	
 	resistance = 0
 	resis = res.to_s
 	bands = []
