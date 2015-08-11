@@ -31,17 +31,23 @@ while true
 	addTCo = false
 	print "Resistance: "
 	res = gets.chomp.to_f
+	
 	#puts "Received resistance: " + res.to_s
+	
 	tol = 0
 	while !tolerance.has_key?(tol) do
-		print "Tolerance (0 = no tolerance): "
+		print "Tolerance (0 = no tolerance (+/-20% by default)): "
 		tol = gets.chomp.to_f
 		if !tolerance.has_key?(tol)
 			puts "Invalid value"
 		end
 	end
 	#break unless tolerance.has_key?(tol)
-	if tol != 0
+	#if tol != 0
+	if true
+		if tol == 0
+			tol = 20.0
+		end
 		while (bNum != 4 && bNum != 5 && bNum != 6)
 			print "4, 5 or 6 bands? "
 			bNum = gets.chomp.to_i
@@ -70,48 +76,69 @@ while true
 	resis = res.to_s
 	bands = []
 	approx = false
-	case bNum
-		when 3, 4
-			val = simplifyNum(res, 2)
-			#puts "Val: " + val.to_s
-			mul = (res/val)
-			if mul != mul.ceil
-				approx = true
-				mul = mul.ceil
-			end
-			if res*10 == val
-				mul = 0.1
-			elsif res*20 == val
-				mul = 0.05
-			end
-			#puts "Mul: " + mul.to_s
-			bands << numbers[val.to_s[0].to_i]	
-			bands << numbers[val.to_s[1].to_i]
-			bands << multipliers[mul.to_f]
-			if addTol
+	mathsIsOk = false
+	firstTry = true
+	while !mathsIsOk
+		if !firstTry
+			oldRes = res
+			res = ((res/10).floor)*10
+			bands = []
+		end
+		case bNum
+			when 3, 4
+				val = simplifyNum(res, 2)
+				
+				#puts "Val: " + val.to_s
+				
+				mul = (res/val)
+				if mul != mul.ceil
+					approx = true
+					mul = mul.ceil
+				end
+				if res*10 == val
+					mul = 0.1
+				elsif res*20 == val
+					mul = 0.05
+				end
+				
+				mathsIsOk = mul*val == res
+				
+				#puts "Mul: " + mul.to_s
+				
+				bands << numbers[val.to_s[0].to_i]	
+				bands << numbers[val.to_s[1].to_i]
+				bands << multipliers[mul.to_f]
+				if addTol
+					bands << tolerance[tol.to_f]
+				end
+			when 5, 6
+				val = simplifyNum(res, 3)
+				mul = (res/val)
+				if mul != mul.ceil
+					approx = true
+					mul = mul.ceil
+				end
+				if res*10 == val
+					mul = 0.1
+				elsif res*20 == val
+					mul = 0.05
+				end
+				
+				mathsIsOk = mul*val == res
+				
+				bands << numbers[val.to_s[0].to_i]	
+				bands << numbers[val.to_s[1].to_i]
+				bands << numbers[val.to_s[2].to_i]
+				bands << multipliers[mul.to_f]
 				bands << tolerance[tol.to_f]
-			end
-		when 5, 6
-			val = simplifyNum(res, 3)
-			mul = (res/val)
-			if mul != mul.ceil
-				approx - true
-				mul = mul.ceil
-			end
-			if res*10 == val
-				mul = 0.1
-			elsif res*20 == val
-				mul = 0.05
-			end
-			bands << numbers[val.to_s[0].to_i]	
-			bands << numbers[val.to_s[1].to_i]
-			bands << numbers[val.to_s[2].to_i]
-			bands << multipliers[mul.to_f]
-			bands << tolerance[tol.to_f]
-			if addTCo
-				bands << tempCoef[temp] 
-			end
+				if addTCo
+					bands << tempCoef[temp] 
+				end
+		end
+		firstTry = false
 	end
-	puts "\nBand colors: " + bands.join(" ")
+	puts "\nBand colors: " + bands.join(" ") 
+	puts "\nMaths didn't work out, try a bigger band number (test with " + (bNum + 1).to_s + " bands)" if !mathsIsOk
+	puts "Maths failed; RESISTOR does not exist. Approximated resistance value " + oldRes.to_s + " to " + res.to_s if approx
 	puts "\n--\\--\n"
 end
