@@ -36,52 +36,71 @@ ping localhost -n 2 >nul
 goto start
 
 :0
-echo Opening determinants
+echo Opening determinants...
+ping localhost -n 2 >nul
+cls
 ruby determinants.rb
-echo 
 goto start
+
 :1
-echo Opening Electrons
+echo Opening Electrons...
+ping localhost -n 2 >nul
+cls
 ruby Electrons.rb
-echo 
 goto start
+
 :2
-echo Opening Equationator
+echo Opening Equationator...
+ping localhost -n 2 >nul
+cls
 ruby Equationator.rb
-echo 
 goto start
+
 :3
-echo Opening matricesmultiplication
+echo Opening matricesmultiplication...
+ping localhost -n 2 >nul
+cls
 ruby matricesmultiplication.rb
-echo 
 goto start
+
 :4
-echo Opening Percentage
+echo Opening Percentage...
+ping localhost -n 2 >nul
+cls
 ruby Percentage.rb
-echo 
 goto start
+
 :5
-echo Opening PGInfiniteSum
+echo Opening PGInfiniteSum...
+ping localhost -n 2 >nul
+cls
 ruby PGInfiniteSum.rb
-echo 
 goto start
+
 :6
-echo Opening PGValueFinder
+echo Opening PGValueFinder...
+ping localhost -n 2 >nul
+cls
 ruby PGValueFinder.rb
-echo 
 goto start
+
 :7
-echo Opening resistor
+echo Opening resistor...
+ping localhost -n 2 >nul
+cls
 ruby resistors.rb
-echo 
 goto start
+
 :8
-echo Opening revResistors2
+echo Opening revResistors2...
+ping localhost -n 2 >nul
+cls
 ruby revResistors2.rb
-echo 
 goto start
+
 :9
-echo Opening Solver
+echo Opening Solver...
+ping localhost -n 2 >nul
+cls
 ruby Solver.rb
-echo 
 goto start
