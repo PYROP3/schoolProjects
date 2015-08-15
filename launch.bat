@@ -3,6 +3,9 @@
 
 cls
 echo Targeting files at %cd%
+echo ------
+echo Last program opened gets saved on memory, so to reopen the last program just press ENTER (without any numbers); only works after opening at least one program
+echo ------
 pause
 :start
 cls
